@@ -40,8 +40,7 @@ public class A2App implements GLEventListener {
     private ControlFrame controls;
     
     public A2App() {
-    	// TODO: replace your name and student number
-        String windowName = "ArcBall and Shadow Maps - YOUR NAME AND STUDENT NUMBER";
+        String windowName = "ArcBall and Shadow Maps - Mike Gao @ 260915701";
         GLProfile glp = GLProfile.get( GLProfile.GL4 );
         GLCapabilities glcap = new GLCapabilities(glp);
         glCanvas = new GLCanvas( glcap );
