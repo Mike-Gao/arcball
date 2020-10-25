@@ -2,6 +2,7 @@ package comp557.a2;
 
 import javax.swing.JPanel;
 import javax.vecmath.Matrix4d;
+import javax.vecmath.Vector3d;
 
 import mintools.parameters.DoubleParameter;
 import mintools.parameters.Parameter;
@@ -58,14 +59,29 @@ public class Camera {
     public void updateMatrix( double width, double height ) {
 
         // TODO: Objective 2: Replace the default viewing matrix with one constructed from the parameters available in this class!
-        V.set( new double[] {
-                1,  0,  0,  0,
-                0,  1,  0,  0,
-                0,  0,  1, -2.5,
-                0,  0,  0,  1,
-        } );
+
+        Vector3d eye = new Vector3d(position.x, position.y, position.z);
+        Vector3d x = new Vector3d();
+        Vector3d y = new Vector3d(up.x, up.y, up.z);
+        Vector3d z = new Vector3d(position.x - lookat.x, position.y - lookat.y, position.z - lookat.z);
+        z.normalize();
+        x.cross(y,z);
+        y.cross(z,x);
+        x.normalize();
+        y.normalize();
+
+        Matrix4d viewMatrix = new Matrix4d(new double[] {
+                x.x, y.x, z.x, 0,
+                x.y, y.y, z.y, 0,
+                x.z, y.z, z.z, 0,
+                -x.dot(eye), -y.dot(eye), -z.dot(eye), 1,
+        });
+        V.set(viewMatrix);
 
         // TODO: Objective 3: Replace the default projection matrix with one constructed from the parameters available in this class!
+        double aspectRatio = width / height;
+        double top, bottom, left, right;
+
         P.set( new double[] {
                 1,  0,  0,  0,
                 0,  1,  0,  0,
