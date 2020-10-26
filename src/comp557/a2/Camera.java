@@ -63,20 +63,26 @@ public class Camera {
         Vector3d eye = new Vector3d(position.x, position.y, position.z);
         Vector3d x = new Vector3d();
         Vector3d y = new Vector3d(up.x, up.y, up.z);
-        Vector3d z = new Vector3d(position.x - lookat.x, position.y - lookat.y, position.z - lookat.z);
-        z.normalize();
-        x.cross(y,z);
-        y.cross(z,x);
+        Vector3d w = new Vector3d(position.x - lookat.x, position.y - lookat.y, position.z - lookat.z);
         x.normalize();
         y.normalize();
+        w.normalize();
+
+        Vector3d u = new Vector3d();
+        u.cross(w, y);
+        u.normalize();
+
+        Vector3d v = new Vector3d();
+        v.cross(w, u);
 
         Matrix4d viewMatrix = new Matrix4d(new double[] {
-                x.x, y.x, z.x, 0,
-                x.y, y.y, z.y, 0,
-                x.z, y.z, z.z, 0,
-                -x.dot(eye), -y.dot(eye), -z.dot(eye), 1,
+                u.x, v.x, w.x, eye.x,
+                u.y, v.y, w.y, eye.y,
+                u.z, v.z, w.z, eye.z,
+                0, 0, 0, 1,
         });
         V.set(viewMatrix);
+        V.invert();
 
         // TODO: Objective 3: Replace the default projection matrix with one constructed from the parameters available in this class!
         double aspectRatio = width / height;

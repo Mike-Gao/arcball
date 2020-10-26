@@ -37,14 +37,14 @@ public class PointLightCamera extends Camera {
     	if ( !debugLightFrustum.getValue() ) return;
 
     	// TODO: Objective 4,5,6: Note lighting disabled for drawing things that should only be drawn in a solid colour using kd.
-    	
+
 		pipeline.disableLighting(drawable);
         Vinv.set(V);
         Vinv.invert();
         Pinv.set(P);
         Pinv.invert();
     	// TODO: Objective 4: draw the light frame using a fancy axis... You must set up the right transformation!
-    	
+
 		pipeline.push();
 		pipeline.multMatrix(drawable, Vinv);
         FancyAxis.draw(drawable, pipeline);
@@ -60,7 +60,7 @@ public class PointLightCamera extends Camera {
 		pipeline.pop(drawable);
 
 
-		// TODO: Objective 5: draw the light view on the near plane of the frustum. You must set up the right transformation! 
+		// TODO: Objective 6: draw the light view on the near plane of the frustum. You must set up the right transformation!
 		// That is, translate and scale the x and y directions of the -1 to 1 quad so that the quad fits exactly the l r t b portion of the near plane
 
         pipeline.push();
