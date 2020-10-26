@@ -61,15 +61,13 @@ public class Camera {
         // TODO: Objective 2: Replace the default viewing matrix with one constructed from the parameters available in this class!
 
         Vector3d eye = new Vector3d(position.x, position.y, position.z);
-        Vector3d x = new Vector3d();
-        Vector3d y = new Vector3d(up.x, up.y, up.z);
+        Vector3d upv = new Vector3d(-up.x, -up.y, -up.z);
         Vector3d w = new Vector3d(position.x - lookat.x, position.y - lookat.y, position.z - lookat.z);
-        x.normalize();
-        y.normalize();
+        upv.normalize();
         w.normalize();
 
         Vector3d u = new Vector3d();
-        u.cross(w, y);
+        u.cross(w, upv);
         u.normalize();
 
         Vector3d v = new Vector3d();
