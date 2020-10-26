@@ -94,7 +94,8 @@ public class ArcBall {
             @Override
             public void mousePressed( MouseEvent e) {
                 // TODO: Objective 1
-                setVecFromMouseEvent(e, start);
+                setVecFromMouseEvent(e, current);
+                start.set(current);
             }
             @Override
             public void mouseExited(MouseEvent e) {}
