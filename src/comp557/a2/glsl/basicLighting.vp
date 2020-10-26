@@ -5,6 +5,9 @@ uniform mat4 V;
 uniform mat4 M;
 uniform mat3 MinvT; 
 
+uniform mat4 lightP;
+uniform mat4 lightV;
+
 in vec4 position;  
 in vec3 normal;
 
@@ -17,5 +20,6 @@ void main() {
     vec4 tmp = V * vec4( MinvT * normal, 0 );
     normalForFP = normalize( tmp.xyz );
     positionForFP = posV.xyz;
-    gl_Position = P * posV; 
+    gl_Position = P * posV;
+    positionLightCVV = lightP * lightV * M * position;
 }

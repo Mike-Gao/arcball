@@ -17,7 +17,7 @@ import mintools.swing.VerticalFlowPanel;
 
 /**
  * Left Mouse Drag Arcball
- * @author kry, gao
+ * @author Mike Gao - 260915701
  */
 public class ArcBall {
 
