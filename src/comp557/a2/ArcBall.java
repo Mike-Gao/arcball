@@ -52,19 +52,19 @@ public class ArcBall {
         double center_x = width / 2.0;
         double center_y = height / 2.0;
 
-        double radius =  0.5 * Math.min(width,height) / fit.getValue();
+        double radius =  0.5 * Math.min(width, height) / fit.getValue();
         double rx = (mouse_x - center_x) / radius;
         double ry = -(mouse_y - center_y) / radius;
         double r = rx * rx + ry * ry;
         double rz = 0.0;
         if (r > 1.0) {
-            double s = 1.0/Math.sqrt(r);
+            double s = 1.0 / Math.sqrt(r);
             rx = s * rx;
             ry = s * ry;
         } else {
             rz = Math.sqrt( 1.0 - r );
         }
-        v.set(rx,ry,rz);
+        v.set(rx, ry, rz);
         v.normalize();
     }
 
@@ -80,7 +80,7 @@ public class ArcBall {
                     double ang = start.angle(current);
                     ang *= gain.getValue();
                     Vector3d axis = new Vector3d();
-                    axis.cross(start,current);
+                    axis.cross(start, current);
                     Matrix4d rotMatrix = new Matrix4d();
                     rotMatrix.set(new AxisAngle4d(axis, ang));
                     R.mul(rotMatrix);

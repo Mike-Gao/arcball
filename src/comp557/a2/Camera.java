@@ -86,14 +86,14 @@ public class Camera {
         double aspectRatio = width / height;
         double n = this.near.getValue();
         double f = this.far.getValue();
-        double tan = Math.tan((fovy.getValue() * 0.5) * Math.PI / 180.0);
+        double tan = Math.tan(fovy.getValue() * Math.PI / 360.0);
         double top = n * tan;
         double bottom = -top;
         double right = top * aspectRatio;
         double left = -right;
 
         P.set( new double[] {
-                2* n / (right - left),  0,  (right + left) / (right - left),  0,
+                2 * n / (right - left),  0,  (right + left) / (right - left),  0,
                 0,  2 * n / (top - bottom),  (top + bottom) / (top - bottom),  0,
                 0,  0, (f + n) / (n - f), (2 * n * f) / (n - f),
                 0,  0, -1,  0,
