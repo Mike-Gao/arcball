@@ -29,6 +29,7 @@ public class Camera {
     /** Projection matrix to be used by the pipeline */
     Matrix4d P = new Matrix4d();
 
+    Double top, bottom, left, right;
     public Camera() {
         near.addParameterListener( new ParameterListener<Double>() {
             @Override
@@ -87,10 +88,10 @@ public class Camera {
         double n = this.near.getValue();
         double f = this.far.getValue();
         double tan = Math.tan(fovy.getValue() * Math.PI / 360.0);
-        double top = n * tan;
-        double bottom = -top;
-        double right = top * aspectRatio;
-        double left = -right;
+        top = n * tan;
+        bottom = -top;
+        right = top * aspectRatio;
+        left = -right;
 
         P.set( new double[] {
                 2 * n / (right - left),  0,  (right + left) / (right - left),  0,

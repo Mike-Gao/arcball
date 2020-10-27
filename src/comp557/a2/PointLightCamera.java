@@ -65,9 +65,13 @@ public class PointLightCamera extends Camera {
 
         pipeline.push();
         pipeline.multMatrix(drawable, Vinv);
+        pipeline.push();
+        pipeline.translate(drawable, 0, 0, -this.near.getValue());
+        pipeline.scale(drawable, left, top, 1);
         pipeline.multMatrix(drawable, Pinv);
 		pipeline.debugLightTexture(drawable);
 		QuadWithTexCoords.draw( drawable, pipeline );
+		pipeline.pop(drawable);
 		pipeline.pop(drawable);
 		pipeline.enableLighting(drawable);
     }
