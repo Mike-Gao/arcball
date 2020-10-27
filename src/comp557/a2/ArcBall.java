@@ -84,6 +84,7 @@ public class ArcBall {
                     Matrix4d rotMatrix = new Matrix4d();
                     rotMatrix.set(new AxisAngle4d(axis, ang));
                     R.mul(rotMatrix);
+                    start.set(current);
                 }
             }
         });
