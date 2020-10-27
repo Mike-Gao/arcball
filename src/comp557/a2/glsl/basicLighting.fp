@@ -37,10 +37,11 @@ void main(void) {
 		// Windowing transform and depth
 	    vec3 plnr = pln.xyz * 0.5  + vec3( 0.5, 0.5, 0.5 );  // frag pos in light normalized and remapped to values from 0 to 1
 	    float shadow = 1.0;
-	    if ( positionLightCVV.w > 0.0 ) { 	   		
+	    if ( positionLightCVV.w > 0.0 ) {
   			float distanceFromLight = texture2D( shadowMap, plnr.xy ).r + sigma; // avoid self shadowing
        		shadow -= distanceFromLight < plnr.z ? 1 : 0 ;
     	}
+
 	    rgb = min( shadow * (scatteredLight + reflectedLight), vec3(1,1,1) );
  	} 
 	fragColor = vec4( rgb ,1 );

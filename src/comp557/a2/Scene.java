@@ -33,7 +33,9 @@ public class Scene {
 
         Random r = new Random(0);
         for ( int ii = 0; ii < 9; ii++ ) {
-
+            if (ii == 4){
+                continue;
+            }
             pipeline.setkd( drawable, 0.7, 0.7, 0.7 );
             pipeline.push();
             double x = (ii/3-1.0);
