@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 
 import com.jogamp.opengl.GLAutoDrawable;
 
+import comp557.a2.chara.KeyFrameAnimatedScene;
 import comp557.a2.geom.Cube;
 import comp557.a2.geom.FancyAxis;
 import comp557.a2.geom.Quad;
@@ -52,6 +53,9 @@ public class Scene {
             pipeline.pop(drawable);
         }
         pipeline.pop(drawable);
+
+        KeyFrameAnimatedScene chara = new KeyFrameAnimatedScene();
+        chara.display(drawable, pipeline);
     }
 
     public JPanel getControls() {
