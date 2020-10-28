@@ -3,6 +3,7 @@ package comp557.a2;
 import java.util.Random;
 
 import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
 
 import com.jogamp.opengl.GLAutoDrawable;
 
@@ -11,12 +12,17 @@ import comp557.a2.geom.Cube;
 import comp557.a2.geom.FancyAxis;
 import comp557.a2.geom.Quad;
 import comp557.a2.geom.Sphere;
+import mintools.parameters.BooleanParameter;
+import mintools.parameters.DoubleParameter;
+import mintools.swing.VerticalFlowPanel;
 
 /**
  *  A procedurally generated scene for testing shadows. 
  */
 public class Scene {
 
+    public BooleanParameter enablecharacter = new BooleanParameter("Enable Character", false);
+    KeyFrameAnimatedScene chara = new KeyFrameAnimatedScene();;
     public void display( GLAutoDrawable drawable, ShadowPipeline pipeline ) {
 
         // draw world frame
@@ -33,7 +39,7 @@ public class Scene {
 
         Random r = new Random(0);
         for ( int ii = 0; ii < 9; ii++ ) {
-            if (ii == 4){
+            if (ii == 4 && enablecharacter.getValue() == true){
                 continue;
             }
             pipeline.setkd( drawable, 0.7, 0.7, 0.7 );
@@ -55,12 +61,16 @@ public class Scene {
             pipeline.pop(drawable);
         }
         pipeline.pop(drawable);
-
-        KeyFrameAnimatedScene chara = new KeyFrameAnimatedScene();
-        chara.display(drawable, pipeline);
+        if (enablecharacter.getValue() == true){
+            chara.display(drawable, pipeline);
+        }
     }
 
     public JPanel getControls() {
-        return null;
+        VerticalFlowPanel vfp = new VerticalFlowPanel();
+        vfp.setBorder(new TitledBorder("Scene Controls"));
+        vfp.add(enablecharacter.getControls());
+        vfp.add(chara.getControls());
+        return vfp.getPanel();
     }
 }

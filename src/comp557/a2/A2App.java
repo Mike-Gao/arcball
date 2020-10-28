@@ -88,6 +88,7 @@ public class A2App implements GLEventListener {
         shadowPipeline = new ShadowPipeline(drawable);        
         scene = new Scene();
         shadowPipeline.attachInteractors( glCanvas );
+        controls.add("scene", scene.getControls());
         controls.add("controls", shadowPipeline.getControls());
     }
     
